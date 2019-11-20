@@ -51,9 +51,27 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 export default function SignIn() {
   const classes = useStyles();
-
+  const [userName, setUserName] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (userName == "chenxi" && password == "123456"){
+        alert("验证通过!")
+        return true;
+    }else{
+        alert("验证不通过!")
+        return false;
+    }
+  };
+  const handleNameChange = (event) => {
+    setUserName(event.target.value);
+  };
+  const handlePwdChange = (event) => {
+    setPassword(event.target.value);
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -64,7 +82,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           民宿PMS
         </Typography>
-        <form className={classes.form} action="/#/messages" noValidate>
+        <form className={classes.form} action="/#/messages" onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -74,7 +92,8 @@ export default function SignIn() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
+            autoFocus 
+            onChange={handleNameChange}
           />
           <TextField
             variant="outlined"
@@ -85,7 +104,8 @@ export default function SignIn() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="current-password" 
+            onChange={handlePwdChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
